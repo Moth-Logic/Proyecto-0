@@ -1,50 +1,40 @@
 def cesarCod(texto, desplazamiento):
-    print("*cesarCod*")
-    print(f"Codificando: {texto} con desplazamiento {desplazamiento}")
-
+    print("Código César")
+    alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
+            'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    
 def cesarDec(texto, desplazamiento):
     print("*cesarDec*")
-    print(f"Descodificando: {texto} con desplazamiento {desplazamiento}")
 
 def monoCod(texto, palabra):
     print("*monoCod*")
-    print(f"Codificando: {texto} con palabra clave {palabra}")
 
 def monoDec(texto, palabra):
     print("*monoDec*")
-    print(f"Descodificando: {texto} con palabra clave {palabra}")
 
 def vigenereCod(texto, palabra):
     print("*vigenereCod*")
-    print(f"Codificando: {texto} con palabra clave {palabra}")
 
 def vigenereDec(texto, palabra):
     print("*vigenereDec*")
-    print(f"Descodificando: {texto} con palabra clave {palabra}")
 
 def playfairCod(texto, palabra):
     print("*playfairCod*")
-    print(f"Codificando: {texto} con palabra clave {palabra}")
 
 def playfairDec(texto, palabra):
     print("*playfairDec*")
-    print(f"Descodificando: {texto} con palabra clave {palabra}")
 
 def railfenceCod(texto):
     print("*railfenceCod*")
-    print(f"Codificando: {texto}")
 
 def railfenceDec(texto):
     print("*railfenceDec*")
-    print(f"Descodificando: {texto}")
 
 def escitalaCod(texto, lineas):
     print("*escitalaCod*")
-    print(f"Codificando: {texto} con {lineas} líneas")
 
 def escitalaDec(texto, lineas):
     print("*escitalaDec*")
-    print(f"Descodificando: {texto} con {lineas} líneas")
 
 def main():
     print("1. Cesar")
@@ -53,17 +43,34 @@ def main():
     print("4. Playfair")
     print("5. Railfence")
     print("6. Escitala")
-    cifrado = int(input("Elige un número: "))
+    cifrado = int(input("Elija una opción (del 1 al 6): "))
+
+    if cifrado < 1 or cifrado > 6:
+        print("ERROR: Ponga algo válido.")
+        main()
     
     print("1. Codificar")
     print("2. Descodificar")
-    accion = int(input("Elige 1 o 2: "))
+    accion = int(input("Elija una opción (1 o 2): "))
+    while accion != 1 and accion != 2:
+        print("ERROR: Ponga algo válido")
+        accion = int(input("Elija una opción (1 o 2): "))
     
+    print("Exprésenos que texto quiere codificar/descodificar: ")
+    texto = input("Inserte su texto: ").lower()
+    espacios = texto.replace(" ","")
+    while espacios.isalpha() == False:
+        print("Exprésenos algo legible")
+        texto = input("Inserte su texto: ").lower()
+        espacios = texto.replace(" ","")
+ 
     if cifrado == 1:
         if accion == 1:
-            cesarCod("texto", 3)
-        else:
-            cesarDec("texto", 3)
+            desplazamiento = input("Inserte su desplazamiento: ")
+            cesarCod("texto", "desplazamiento")
+        elif accion == 2:
+            desplazamiento = input("Inserte su desplazamiento inverso: ")
+            cesarDec("texto", "desplazamiento")
     elif cifrado == 2:
         if accion == 1:
             monoCod("texto", "clave")
@@ -86,9 +93,9 @@ def main():
             railfenceDec("texto")
     elif cifrado == 6:
         if accion == 1:
-            escitalaCod("texto", 3)
+            escitalaCod("texto", "vueltas")
         else:
-            escitalaDec("texto", 3)
+            escitalaDec("texto", "vueltas")
 
 if __name__ == "__main__":
     main()
