@@ -56,6 +56,17 @@ def playfairCod(texto, clave):
         while contador < (len(texto)):
             print(texto[contador-(len(texto)+1)])
             contador += 1
+
+    mensaje = input("Pon tu mensaje: ")
+    mensaje2 = ""
+
+    for i in range(len(mensaje)):
+        if i < len(mensaje) - 1 and mensaje[i] == mensaje[i + 1]:
+            mensaje2 += mensaje[i] + "1"
+        else:
+            mensaje2 += mensaje[i]
+    print(mensaje2)
+
         
 def playfairDec(texto, clave):
     print("*playfairDec*")
@@ -86,6 +97,8 @@ def main():
         print("6. Escitala")
         print("7. Salir")
         
+def main():
+    while True:
         try:
             cifrado = int(input("Elija una opción (del 1 al 7): "))
             if cifrado == 7:
@@ -99,7 +112,7 @@ def main():
             print("Error: Debe ingresar un número entero.")
             presione_tecla()
             continue
-        
+
         try:
             accion = int(input("1. Codificar\n2. Descodificar\nElija una opción (1 o 2): "))
             if accion != 1 and accion != 2:
@@ -110,7 +123,7 @@ def main():
             print("Error: Debe ingresar un número entero.")
             presione_tecla()
             continue
-        
+
         while True:
             texto = input("Inserte su texto: ").lower()
             espacios = texto.replace(" ", "")
@@ -118,7 +131,7 @@ def main():
                 break
             else:
                 print("Error: Solo se permiten letras y espacios. Intente nuevamente.")
-        
+
         if cifrado == 1:
             if accion == 1:
                 while True:
@@ -136,7 +149,7 @@ def main():
                     except ValueError:
                         print("Error: El valor debe ser un número entero. Intente nuevamente.")
                 cesarDec(texto, desplazamiento)
-        
+
         elif cifrado == 2:
             while True:
                 clave = input("Ingrese su clave (sin espacios): ").lower()
@@ -148,7 +161,7 @@ def main():
                 monoCod(texto, clave)
             else:
                 monoDec(texto, clave)
-        
+
         elif cifrado == 3:
             while True:
                 clave = input("Ingrese su clave (sin espacios): ").lower()
@@ -160,7 +173,7 @@ def main():
                 vigenereCod(texto, clave)
             else:
                 vigenereDec(texto, clave)
-        
+
         elif cifrado == 4:
             while True:
                 clave = input("Ingrese su clave (sin espacios): ").lower()
@@ -172,13 +185,13 @@ def main():
                 playfairCod(texto, clave)
             else:
                 playfairDec(texto, clave)
-        
+
         elif cifrado == 5:
             if accion == 1:
                 railfenceCod(texto)
             else:
                 railfenceDec(texto)
-        
+
         elif cifrado == 6:
             while True:
                 try:
@@ -193,9 +206,9 @@ def main():
                 escitalaCod(texto, vueltas)
             else:
                 escitalaDec(texto, vueltas)
-        
-        # Después de mostrar el resultado, esperar tecla para volver al menú
+
         presione_tecla()
+
 
 if __name__ == "__main__":
     main()
