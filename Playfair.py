@@ -1,8 +1,7 @@
 texto = input("Texto: ")
 clave = input("Clave: ")
 
-alfabeto = list("abcdefghijklmnñopqrstuvwxyz")
-    extras = list("123")
+alfabeto = list("abcdefghijklmnñopqrstuvwxyz123")
 
     claveunica = []
     for letra in clave:
