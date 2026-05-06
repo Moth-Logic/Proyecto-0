@@ -40,5 +40,3 @@ alfabeto = list("abcdefghijklmnñopqrstuvwxyz")
         else:
             mensaje2 += mensaje[i]
     print(mensaje2)
-
-        
