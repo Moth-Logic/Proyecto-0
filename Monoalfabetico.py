@@ -23,6 +23,8 @@ def monoalfabeticoCod(texto, clave):
         if letra in alfabeto:
             posicion= alfabeto.index(letra)
             mensajeCifrado += alfabetoClave[posicion]
+        else:
+            mensajeCifrado += letra
 
     return mensajeCifrado
 
@@ -72,4 +74,6 @@ print(monoalfabeticoDec(mensaje, claveUsada))
     
             
     
+    
+
     
