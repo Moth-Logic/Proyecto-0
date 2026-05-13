@@ -48,12 +48,58 @@ def cesarDec(texto, desplazamiento):
 
 
 def monoCod(texto, palabra):
-    print("*monoCod* (Por implementar)")
+    alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+                'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    print("*monoalfabeticoCod*")
+    sinRepetir = ""
+
+    for letra in palabra.lower():
+        if letra not in sinRepetir:
+            sinRepetir += letra
+    
+    alfabetoClave=sinRepetir
+    for letra in alfabeto:
+        if letra not in alfabetoClave:
+            alfabetoClave += letra
+            
+    #sustitucion por posicion        
+    mensajeCifrado = ""
+    for letra in texto.lower():
+        if letra in alfabeto:
+            posicion= alfabeto.index(letra)
+            mensajeCifrado += alfabetoClave[posicion]
+        else:
+            mensajeCifrado += letra
+
+    print(mensajeCifrado)
+    return mensajeCifrado
 
 
 def monoDec(texto, palabra):
-    print("*monoDec* (Por implementar)")
+    alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+                'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    print("*monoDec*")
 
+    sinRepetir=""
+    for letra in palabra.lower():
+        if letra not in sinRepetir and letra in alfabeto:
+            sinRepetir += letra
+
+    alfabetoClave = sinRepetir
+    for letra in alfabeto:
+        if letra not in alfabetoClave:
+            alfabetoClave += letra
+
+    mensajeDescifrado = ""
+    for letra in texto.lower():
+        if letra in alfabetoClave:
+            posicion = alfabetoClave.index(letra)
+            mensajeDescifrado += alfabeto[posicion]
+        else:
+            mensajeDescifrado += letra
+
+    print(mensajeDescifrado)
+    return mensajeDescifrado
 
 def vigenereCod(texto, palabra):
     print("*vigenereCod*")
@@ -98,10 +144,8 @@ def vigenereDec(texto, palabra):
 
 def playfairCod(texto, clave):
     print("*playfairCod*")
-    # Alfabeto completo: a-z, ñ, y dígitos 1,2,3 (total 30 caracteres)
     alfabeto = list("abcdefghijklmnñopqrstuvwxyz123")
     
-    # Construir clave única (primero los caracteres de la clave en orden, luego el resto del alfabeto)
     claveunica = []
     for letra in clave:
         if letra not in claveunica:
@@ -110,10 +154,8 @@ def playfairCod(texto, clave):
         if letra not in claveunica:
             claveunica.append(letra)
     
-    # Crear matriz 6x5 a partir de la clave única
     matriz = [claveunica[i*5:(i+1)*5] for i in range(6)]
     
-    # Preprocesar el texto: insertar '1' entre letras duplicadas y añadir '1' al final si la longitud es impar
     mensaje2 = []
     for i in range(len(texto)):
         if i < len(texto)-1 and texto[i] == texto[i+1]:
@@ -124,18 +166,15 @@ def playfairCod(texto, clave):
     if len(mensaje2) % 2 != 0:
         mensaje2.append('1')
     
-    # Dividir en pares de caracteres
     pares = [mensaje2[i:i+2] for i in range(0, len(mensaje2), 2)]
     
-    # Función auxiliar para buscar la posición de una letra en la matriz
     def buscar(letra):
         for i in range(6):
             for j in range(5):
                 if matriz[i][j] == letra:
                     return i, j
         raise ValueError(f"Carácter '{letra}' no encontrado en la matriz")
-    
-    # Cifrar cada par según las reglas de Playfair
+
     cifrado = []
     for a, b in pares:
         fa, ca = buscar(a)
@@ -146,7 +185,7 @@ def playfairCod(texto, clave):
         elif ca == cb:             # misma columna -> desplazar abajo
             cifrado.append(matriz[(fa+1)%6][ca])
             cifrado.append(matriz[(fb+1)%6][cb])
-        else:                      # rectángulo -> intercambiar columnas
+        else:                      # diferente todo -> intercambiar columnas
             cifrado.append(matriz[fa][cb])
             cifrado.append(matriz[fb][ca])
 
@@ -158,7 +197,6 @@ def playfairDec(texto, clave):
     print("*playfairDec*")
     alfabeto = list("abcdefghijklmnñopqrstuvwxyz123")
     
-    # Matriz de la clave
     claveunica = []
     for letra in clave:
         if letra not in claveunica:
@@ -169,7 +207,6 @@ def playfairDec(texto, clave):
     
     matriz = [claveunica[i*5:(i+1)*5] for i in range(6)]
     
-    # Es par? referencia a flowgorithm
     if len(texto) % 2 != 0:
         raise ValueError("El texto cifrado debe tener longitud par")
     
@@ -193,24 +230,20 @@ def playfairDec(texto, clave):
         elif ca == cb:             # misma columna desplaza arriba
             descifrado.append(matriz[(fa-1)%6][ca])
             descifrado.append(matriz[(fb-1)%6][cb])
-        else:                      # rectángulo intercammbiar columnas
+        else:                      # diferente todo intercammbiar columnas
             descifrado.append(matriz[fa][cb])
             descifrado.append(matriz[fb][ca])
     
-    # quitar 1
     resultado = []
     i = 0
     while i < len(descifrado):
         if descifrado[i] == '1':
-            # Si es 1 interno y está entre dos letras iguales, lo saltamos
             if i > 0 and i < len(descifrado)-1 and descifrado[i-1] == descifrado[i+1]:
                 i += 1
                 continue
-            # Si es 1 al final, lo saltamos
             if i == len(descifrado)-1:
                 i += 1
                 continue
-        # en el whateevr
         resultado.append(descifrado[i])
         i += 1
     
@@ -220,20 +253,15 @@ def playfairDec(texto, clave):
 
 def railfenceCod(texto):
     print("*railfenceCod*")
-    # Siempre van a ser 3 rieles lmao
     rieles = 3
-
-# Creamos una lista vacía para guardar cada riel
 
     lista_rieles = []
     for i in range(rieles):
         lista_rieles.append("")
 
-# Que riel estamos
     fila = 0          
     direccion = 1   
 
-# cada letra del texto
     for letra in texto:
         lista_rieles[fila] = lista_rieles[fila] + letra
         if fila == 0:
@@ -242,27 +270,20 @@ def railfenceCod(texto):
             direccion = -1
         fila = fila + direccion
 
-# Unimos todo
     cifrado = ""
     for riel in lista_rieles:
         cifrado = cifrado + riel
 
-# Mostramos los rieles
     print("\nRieles:")
     for i in range(rieles):
         print("Riel", i + 1, ":", lista_rieles[i])
 
-# final
     print("\nTexto cifrado:", cifrado)
 
 def railfenceDec(texto):
     print("*railfenceDec*")
 
-    # Always 3 rails
     rieles = 3
-
-    # - "rieles" filas
-    # - len(texto) columnas
 
     matriz = []
     for i in range(rieles):
@@ -270,8 +291,6 @@ def railfenceDec(texto):
         for j in range(len(texto)):
             fila.append("")
         matriz.append(fila)
-
-    # pasito a pasito suve suavecito
 
     fila = 0
     direccion = 1
@@ -313,21 +332,60 @@ def railfenceDec(texto):
 
         fila = fila + direccion
 
-    # Mostrar matriz lmao
     print("\nMatriz reconstruida:")
     for i in range(rieles):
         print(matriz[i])
 
-    #show ur super cool text
     print("\nTexto descifrado:", resultado)
 
 
 def escitalaCod(texto, lineas):
-    print("*escitalaCod* (Por implementar)")
+    print("*escitalaCod*")
+    
+    while len(texto) % lineas != 0:
+        texto += " "
+
+    texto = texto.replace(" ", "-")
+
+    filas = [""] * lineas
+
+    for i, letra in enumerate(texto):
+        fila = i % lineas
+        filas[fila] += letra
+    
+    textoCodificado = ''.join(filas)
+    
+    resultado = ''
+    for i in range(0, len(textoCodificado), 5):
+        separar = ''.join(textoCodificado[i:i+5])
+        resultado += separar + ' '
+
+    print(resultado)
+    return resultado
+
 
 
 def escitalaDec(texto, lineas):
-    print("*escitalaDec* (Por implementar)")
+    print("*escitalaDec*")
+    
+    texto = texto.replace(" ", "")
+
+    columnas = len(texto) // lineas
+
+    filas = []
+    inicio = 0
+    for i in range(lineas):
+        fin = inicio + columnas
+        filas.append(texto[inicio:fin])
+        inicio = fin
+
+    resultado = ""
+    for c in range(columnas):
+        for f in range(lineas):
+            resultado += filas[f][c]
+
+    resultado = resultado.replace("-", " ")
+    print(resultado.rstrip())
 
 
 def presione_tecla():
@@ -335,6 +393,12 @@ def presione_tecla():
 
 
 def main():
+    """PROGRAMA DE CRIPTOGRAFIA: Un programa hecho por Naomi Amador, Yancy Jiron y Julián Solórzano.
+       Contiene 6 estilos de criptografía: (César, Mono, Vigenére, Playfair, Railfence y Escítala)
+       
+       Para usarlo existe un menú que tiene 7 opciones, la última es para Salir del Programa.
+       Después de escoger el cifrado, te va a pedir si quiere cifrar o descifrar, y de ahí 
+       te pedirá texto y algun otro valor necesario para el cifrado. Lindo Día! :3"""
     # Menú. Uno escoje del 1 al 6 para cifrado. 7 para salir. 
     while True:
         
@@ -381,10 +445,10 @@ def main():
 
         # Entrada de texto
         while True:
-            print("Atención: Si su escogencia es Playfair, solo se permiten letras. Sin espacios")
-            texto = input("\nInserte su texto: ").lower()
+            print("\nAtención: Si su escogencia es Playfair, solo se permiten letras. Sin espacios")
+            texto = input("Inserte su texto: ").lower()
             espacios = texto.replace(" ", "")
-            if espacios.isalpha() or espacios == "":
+            if espacios.isalpha() or espacios == "" or (char.isdigit() for char in texto):
                 break
             else:
                 print("Error: Solo se permiten letras y espacios. Intente nuevamente.")
