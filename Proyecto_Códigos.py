@@ -1,5 +1,9 @@
 def cesarCod(texto, desplazamiento):
-    """Cifrado César con soporte para Ñ"""
+    """Cifrado César con soporte para Ñ. Mueve las letras dependiendo del dezplazamiento
+    Entradas y Restricciones: 
+    Texto: un string, puede incluir espacios Y guiones.
+    Restricciones: No se permiten otros caracteres raros.
+    Salidas: Su texto cifrado."""
     alfabeto_minusculas = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                            'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     alfabeto_mayusculas = [letra.upper() for letra in alfabeto_minusculas]
@@ -23,7 +27,11 @@ def cesarCod(texto, desplazamiento):
     return texto_cifrado
 
 def cesarDec(texto, desplazamiento):
-    """Cifrado César con soporte para Ñ"""
+    """Descifrado César con soporte para Ñ. Mueve las letras dependiendo del dezplazamiento
+    Entradas y Restricciones: 
+    Texto: un string, puede incluir espacios Y guiones.
+    Restricciones: No se permiten otros caracteres raros.
+    Salidas: Su texto descifrado."""
     alfabeto_minusculas = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                            'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     alfabeto_mayusculas = [letra.upper() for letra in alfabeto_minusculas]
@@ -48,6 +56,7 @@ def cesarDec(texto, desplazamiento):
 
 
 def monoCod(texto, palabra):
+    """"""
     alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     print("*monoalfabeticoCod*")
